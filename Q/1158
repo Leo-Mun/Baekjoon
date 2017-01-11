@@ -1,5 +1,3 @@
-package datastructure.studt.dalpha;
-
 import java.io.BufferedReader;
 import java.util.List;
 import java.util.ArrayList;
