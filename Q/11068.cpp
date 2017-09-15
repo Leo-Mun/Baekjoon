@@ -1,46 +1,35 @@
-#include <iostream>
+#include <cstdio>
 #include <string>
-#include <vector>
-
+#include <iostream>
 
 using namespace std;
 
-bool isPalindrom(string data) {
-	for (int i = 0; i < data.length() / 2; i++) {
-		if (data[i] != data[data.length() - i - 1]) {
+int result[1000000];
+
+bool isPalindrom(int index) {
+	for (int j = 0; j < index / 2; j++) {
+		if (result[j] != result[index - j - 1]) {
 			return false;
 		}
 	}
 	return true;
 }
 
-bool isPalindrom(vector<int> v) {
-	for (int i = 0; i < v.size() / 2; i++) {
-		if (v[i] != v[v.size() - i - 1]) {
-			return false;
-		}
-	}
-	return true;
-}
-
-void convert(string data) {
+bool convert(int data) {
 	for (int i = 2; i <= 64; i++) {
-		vector<int> v;
-		
-		int tmp = atoi(data.c_str());
+		int tmp = data;
+		int index = 0;
+
 		while (tmp != 0) {
-			v.push_back(tmp % i);
+			result[index++] = tmp % i;
 			tmp /= i;
 		}
-
-		if (isPalindrom(v)) {
-			cout << "1" << endl;
-			return;
+		if (isPalindrom(index)) {
+			return true;
 		}
-		v.clear();
+
 	}
-	cout << "0" << endl;
-	return;
+	return false;
 }
 
 int main() {
@@ -50,18 +39,15 @@ int main() {
 	cin >> input;
 
 	while (input--) {
-		string data;
+		int data;
 		cin >> data;
 
-		if (isPalindrom(data)) {
-			cout << "1" << endl;
-			continue;
-		}
-		else {
-			convert(data);
-		}
-
-
+			if (convert(data)) {
+				printf("1\n");
+			}
+			else {
+				printf("0\n");
+			}
 	}
 
 	return 0;
